@@ -75,8 +75,42 @@ class QueryDecorator
 
 
         if (true === $this->allowSearch && null !== $params) {
-            $searchItems = $params->getSearchItems();
+            /**
+             * Search expression?
+             */
+            $searchExpression = $params->getSearchExpression();
+            if ('' !== $searchExpression) {
+                if ($this->allowedSearchFields) {
 
+                    $markers['search'] = '%' . str_replace('%', '\%', $searchExpression) . '%';
+
+                    $c = 0;
+                    if (false === $this->hasWhere($query)) {
+                        $query .= " where ( ";
+                        $countQuery .= " where ( ";
+                    } else {
+                        $query .= " and ( ";
+                        $countQuery .= " and ( ";
+                    }
+
+                    foreach ($this->allowedSearchFields as $field) {
+                        if (0 !== $c++) {
+                            $query .= ' or ';
+                            $countQuery .= ' or ';
+                        }
+                        $query .= "$field like :search";
+                        $countQuery .= "$field like :search";
+                    }
+                    $query .= " )";
+                    $countQuery .= " )";
+                }
+            }
+
+
+            /**
+             * Search items?
+             */
+            $searchItems = $params->getSearchItems();
             if (is_array($searchItems)) {
                 if ($searchItems) {
                     $valid = false;
@@ -85,8 +119,13 @@ class QueryDecorator
                         if (in_array($field, $this->allowedSearchFields)) {
 
                             if (false === $valid) {
-                                $query .= " where ";
-                                $countQuery .= " where ";
+                                if (false === $this->hasWhere($query)) {
+                                    $query .= " where ";
+                                    $countQuery .= " where ";
+                                } else {
+                                    $query .= " and ";
+                                    $countQuery .= " and ";
+                                }
                                 $valid = true;
                             }
 
@@ -112,7 +151,6 @@ class QueryDecorator
             } else {
                 throw new ListParamsException("Oops, this form of searchItem is not recognized yet, you may want to upgrade the code");
             }
-
         }
 
 
@@ -215,5 +253,16 @@ class QueryDecorator
     protected function onSortFieldNotAllowed($invalidSortField) // override me
     {
 
+    }
+
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    private function hasWhere($query)
+    {
+        if (false === stripos($query, ' where ')) {
+            return false;
+        }
+        return true;
     }
 }

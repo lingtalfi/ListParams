@@ -42,6 +42,11 @@ Related
 History Log
 ------------------
     
+- 1.1.0 -- 2017-08-09
+
+    - fix QueryDecorator.decorate searchItems is now aware of existing where in the request
+    - enhance QueryDecorator.decorate add single searchExpression handling
+    
 - 1.0.0 -- 2017-08-08
 
     - initial commit 
