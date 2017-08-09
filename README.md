@@ -42,6 +42,10 @@ Related
 History Log
 ------------------
     
+- 1.2.0 -- 2017-08-09
+
+    - add InfoFrame
+    
 - 1.1.0 -- 2017-08-09
 
     - fix QueryDecorator.decorate searchItems is now aware of existing where in the request

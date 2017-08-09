@@ -3,6 +3,7 @@
 
 namespace ListParams\ListBundle;
 
+use ListParams\Controller\ListInfoFrame;
 use ListParams\Controller\PaginationFrame;
 use ListParams\Controller\SortFrame;
 use ListParams\ListParamsInterface;
@@ -30,6 +31,11 @@ interface ListBundleInterface
      * @return SortFrame|null
      */
     public function getSortFrame();
+
+    /**
+     * @return InfoFrame|null
+     */
+    public function getInfoFrame();
 
 
 

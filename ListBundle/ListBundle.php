@@ -3,6 +3,7 @@
 
 namespace ListParams\ListBundle;
 
+use ListParams\Controller\InfoFrame;
 use ListParams\Controller\PaginationFrame;
 use ListParams\Controller\SortFrame;
 use ListParams\ListParamsInterface;
@@ -13,6 +14,7 @@ class ListBundle implements ListBundleInterface
     private $items;
     private $pagination;
     private $sort;
+    private $info;
     private $listParams;
 
     public function __construct()
@@ -46,6 +48,11 @@ class ListBundle implements ListBundleInterface
         return $this->sort;
     }
 
+    public function getInfoFrame()
+    {
+        return $this->info;
+    }
+
 
 
     //--------------------------------------------
@@ -66,6 +73,12 @@ class ListBundle implements ListBundleInterface
     public function setSort(SortFrame $sort)
     {
         $this->sort = $sort;
+        return $this;
+    }
+
+    public function setInfo(InfoFrame $info)
+    {
+        $this->info = $info;
         return $this;
     }
 
