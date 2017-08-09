@@ -3,7 +3,8 @@
 
 namespace ListParams\ListBundle;
 
-use ListParams\Controller\ListInfoFrame;
+
+use ListParams\Controller\InfoFrame;
 use ListParams\Controller\PaginationFrame;
 use ListParams\Controller\SortFrame;
 use ListParams\ListParamsInterface;

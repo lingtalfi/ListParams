@@ -42,6 +42,10 @@ Related
 History Log
 ------------------
     
+- 1.2.1 -- 2017-08-09
+
+    - fix ListBundleInterface incorrect InfoFrame path 
+    
 - 1.2.0 -- 2017-08-09
 
     - add InfoFrame
