@@ -42,6 +42,10 @@ Related
 History Log
 ------------------
     
+- 1.3.0 -- 2017-08-18
+
+    - add LingListBundle 
+    
 - 1.2.1 -- 2017-08-09
 
     - fix ListBundleInterface incorrect InfoFrame path 
