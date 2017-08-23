@@ -84,9 +84,19 @@ interface ListParamsInterface
 
 
     /**
-     * @return int|null
+     * @return int|null,
+     * you should set a default value,
+     * unless you plan to use the QueryDecorator, in which case you can
+     * set the default value with the QueryDecorator (which is with the model of MVC)
      */
     public function getNumberOfItemsPerPage();
+
+    /**
+     * Sets the number of items per page.
+     * This is generally set automatically from the QueryDecorator.
+     * (not by the developer manually)
+     */
+    public function setNumberOfItemsPerPage($n);
 
 
 
@@ -124,6 +134,7 @@ interface ListParamsInterface
     // NUMBER OF ITEMS (COMES FROM THE MODEL)
     //--------------------------------------------
     public function setTotalNumberOfItems($n);
+
 
     public function getTotalNumberOfItems();
 

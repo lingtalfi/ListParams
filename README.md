@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.6.0 -- 2017-08-23
+
+    - add ListParamsInterface.setNumberOfItemsPerPage method  
+    
 - 1.5.0 -- 2017-08-23
 
     - ListParamsInterface.getNumberOfItemsPerPage now can return null  

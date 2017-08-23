@@ -197,6 +197,7 @@ class QueryDecorator
                 $nipp = $params->getNumberOfItemsPerPage();
                 if (null === $nipp) {
                     $nipp = $this->defaultNipp;
+                    $params->setNumberOfItemsPerPage($nipp);
                 }
             } else {
                 $nipp = $this->defaultNipp;
