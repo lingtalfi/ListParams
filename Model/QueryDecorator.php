@@ -26,6 +26,8 @@ class QueryDecorator
 
 
     private $defaultNipp;
+    private $defaultSort;
+    private $defaultSortDir;
 
 
     public function __construct()
@@ -158,6 +160,13 @@ class QueryDecorator
             $sortItems = $params->getSortItems();
             $valid = false;
             $c = 0;
+
+            if (empty($sortItems)) {
+                if (null !== $this->defaultSort) {
+                    $sortItems[$this->defaultSort] = $this->defaultSortDir;
+                }
+            }
+
             foreach ($sortItems as $field => $isAsc) {
                 if (in_array($field, $this->allowedSortFields)) {
                     if (false === $valid) {
@@ -237,6 +246,13 @@ class QueryDecorator
     public function setDefaultNipp($defaultNipp)
     {
         $this->defaultNipp = $defaultNipp;
+        return $this;
+    }
+
+    public function setDefaultSort($sort, $sortDir)
+    {
+        $this->defaultSort = $sort;
+        $this->defaultSortDir = $sortDir;
         return $this;
     }
 

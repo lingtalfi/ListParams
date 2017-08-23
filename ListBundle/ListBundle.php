@@ -82,7 +82,7 @@ class ListBundle implements ListBundleInterface
         return $this;
     }
 
-    public function setListParams($listParams)
+    public function setListParams(ListParamsInterface $listParams)
     {
         $this->listParams = $listParams;
         return $this;
