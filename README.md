@@ -440,6 +440,11 @@ Related
 History Log
 ------------------
     
+- 1.5.0 -- 2017-08-23
+
+    - ListParamsInterface.getNumberOfItemsPerPage now can return null  
+    - now QueryDecorator.defaultNipp is used if nipp is null 
+    
 - 1.4.0 -- 2017-08-23
 
     - add QueryDecorator.setDefaultSort method 

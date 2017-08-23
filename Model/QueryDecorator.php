@@ -195,6 +195,9 @@ class QueryDecorator
             $page = $params->getPage();
             if (true === $this->allowNipp) {
                 $nipp = $params->getNumberOfItemsPerPage();
+                if (null === $nipp) {
+                    $nipp = $this->defaultNipp;
+                }
             } else {
                 $nipp = $this->defaultNipp;
             }

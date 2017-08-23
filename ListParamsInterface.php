@@ -84,7 +84,7 @@ interface ListParamsInterface
 
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getNumberOfItemsPerPage();
 

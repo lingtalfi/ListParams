@@ -65,7 +65,7 @@ class ListParams implements ListParamsInterface
         $this->searchExpression = "";
         $this->searchItems = [];
         $this->page = 1;
-        $this->nipp = 20;
+        $this->nipp = null;
 
         $this->pool = $_GET;
 
