@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.8.2 -- 2017-09-27
+
+    - fix ListParamsUtil.applyParams sort cmp function not working correctly 
+    
 - 1.8.1 -- 2017-09-27
 
     - fix ListParamsUtil.applyParams possible division by zero with nipp  

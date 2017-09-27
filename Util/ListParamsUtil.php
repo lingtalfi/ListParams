@@ -108,7 +108,6 @@ class ListParamsUtil
         } else {
             $ret = $rows;
         }
-
         //--------------------------------------------
         // SORTING
         //--------------------------------------------
@@ -226,7 +225,7 @@ class ListParamsUtil
         return function ($a, $b) use (&$sortValues) {
 
 
-            foreach ($sortValues as $column => $sortDir) {
+            foreach ($sortValues as $column => $isAsc) {
 
                 // skip "forgotten" unsearchable columns
                 if (false === array_key_exists($column, $a)) {
@@ -236,14 +235,14 @@ class ListParamsUtil
                 if (is_string($a[$column])) {
                     $diff = strcmp($a[$column], $b[$column]);
                     if ($diff !== 0) {
-                        if ('asc' === $sortDir) {
+                        if (true === $isAsc) {
                             return $diff;
                         }
                         return $diff * -1;
                     }
                 } else { // float, int
                     $diff = ($a[$column] > $b[$column]);
-                    if ('asc' === $sortDir) {
+                    if (true === $isAsc) {
                         return $diff;
                     } else {
                         return !$diff;
