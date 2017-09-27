@@ -170,4 +170,9 @@ interface ListParamsInterface
     public function getAllowedSearchFields();
 
 
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    public function getHash();
+
 }

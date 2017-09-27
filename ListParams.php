@@ -448,6 +448,15 @@ class ListParams implements ListParamsInterface
     }
 
 
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    public function getHash()
+    {
+        $pool = $this->pool;
+        asort($pool);
+        return md5(serialize($pool));
+    }
 
 
 }

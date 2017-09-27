@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.7.0 -- 2017-09-27
+
+    - add ListParamsInterface.getHash method  
+    
 - 1.6.0 -- 2017-08-23
 
     - add ListParamsInterface.setNumberOfItemsPerPage method  
