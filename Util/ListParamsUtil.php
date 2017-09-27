@@ -15,6 +15,9 @@ class ListParamsUtil
         $ret = [];
 
 
+        $defaultNipp = 20;
+
+
         //--------------------------------------------
         // INIT
         //--------------------------------------------
@@ -121,12 +124,15 @@ class ListParamsUtil
         $params->setTotalNumberOfItems($nbTotalItems);
 
 
-
-
         //--------------------------------------------
         // SLICING
         //--------------------------------------------
         if ('all' !== $nipp) {
+            if (null === $nipp) {
+                $nipp = $defaultNipp;
+                $params->setNumberOfItemsPerPage($nipp);
+            }
+
             // DOUBLE CHECKING USER INPUT
             // page data might come from the user, so we double check
             if ($page < 1) {
@@ -139,7 +145,6 @@ class ListParamsUtil
             $offset = ($page - 1) * $nipp;
             $ret = array_slice($ret, $offset, $nipp);
         }
-
 
 
         return $ret;

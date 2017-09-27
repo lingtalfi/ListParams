@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.8.1 -- 2017-09-27
+
+    - fix ListParamsUtil.applyParams possible division by zero with nipp  
+    
 - 1.8.0 -- 2017-09-27
 
     - add ListParamsUtil.applyParams method  
