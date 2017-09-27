@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.8.0 -- 2017-09-27
+
+    - add ListParamsUtil.applyParams method  
+    
 - 1.7.0 -- 2017-09-27
 
     - add ListParamsInterface.getHash method  

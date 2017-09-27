@@ -9,6 +9,143 @@ use ListParams\ListParamsInterface;
 class ListParamsUtil
 {
 
+
+    public static function applyParams(ListParamsInterface $params, array $rows)
+    {
+        $ret = [];
+
+
+        //--------------------------------------------
+        // INIT
+        //--------------------------------------------
+        $searchItems = $params->getSearchItems();
+        $sortItems = $params->getSortItems();
+        $nipp = $params->getNumberOfItemsPerPage();
+        $page = $params->getPage();
+
+
+        //--------------------------------------------
+        // FILTERING
+        //--------------------------------------------
+        if (count($searchItems) > 0) {
+            foreach ($rows as $row) {
+
+                $match = true;
+
+                foreach ($searchItems as $col => $value) {
+
+                    // some extra columns might not be searchable
+                    if (false === array_key_exists($col, $row)) {
+                        continue;
+                    }
+
+
+                    // searchExpression
+                    if (is_string($value) || is_numeric($value)) {
+                        $value = (string)$value;
+                        if (false === stripos($row[$col], $value)) {
+                            $match = false;
+                            break;
+                        }
+                    } // searchConstraint
+                    elseif (is_array($value)) {
+                        $rowVal = $row[$col];
+                        list($operator, $operand) = $value;
+                        switch ($operator) {
+                            case '<':
+                                $match = ($rowVal < $operand);
+                                break;
+                            case '<=':
+                                $match = ($rowVal <= $operand);
+                                break;
+                            case '>':
+                                $match = ($rowVal > $operand);
+                                break;
+                            case '>=':
+                                $match = ($rowVal >= $operand);
+                                break;
+                            case 'between':
+                                $operand2 = $value[2];
+                                $match = ($rowVal >= $operand && $rowVal <= $operand2);
+                                break;
+                            case '=':
+                                $match = ($rowVal === $operand);
+                                break;
+                            case '!=':
+                                $match = ($rowVal !== $operand);
+                                break;
+                            case 'like':
+                                $match = (false !== (stripos($rowVal, $operand)));
+                                break;
+                            case '%like':
+                                $match = (0 === (stripos($rowVal, $operand)));
+                                break;
+                            case 'like%':
+                                $match = (0 === (stripos(strrev($rowVal), strrev($operand))));
+                                break;
+                            default:
+                                break;
+                        }
+                        if (false === $match) {
+                            break;
+                        }
+                    } // searchFilter
+                    elseif (is_callable($value)) {
+                        if (false === call_user_func($value, $row[$col])) {
+                            $match = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (true === $match) {
+                    $ret[] = $row;
+                }
+            }
+        } else {
+            $ret = $rows;
+        }
+
+        //--------------------------------------------
+        // SORTING
+        //--------------------------------------------
+        if (count($sortItems) > 0) {
+            usort($ret, self::make_cmp($sortItems));
+        }
+
+
+        //--------------------------------------------
+        // PREPARING NB TOTAL ITEMS
+        //--------------------------------------------
+        $nbTotalItems = count($ret);
+        $params->setTotalNumberOfItems($nbTotalItems);
+
+
+
+
+        //--------------------------------------------
+        // SLICING
+        //--------------------------------------------
+        if ('all' !== $nipp) {
+            // DOUBLE CHECKING USER INPUT
+            // page data might come from the user, so we double check
+            if ($page < 1) {
+                $page = 1;
+            }
+            $maxPage = ceil($nbTotalItems / $nipp);
+            if ($page > $maxPage) {
+                $page = $maxPage;
+            }
+            $offset = ($page - 1) * $nipp;
+            $ret = array_slice($ret, $offset, $nipp);
+        }
+
+
+
+        return $ret;
+    }
+
+
     public static function removeNonPersistentParams(array &$pool, ListParamsInterface $params, $except = null)
     {
         if (false === $params->hasPersistentPage() && 'page' !== $except) {
@@ -74,5 +211,41 @@ class ListParamsUtil
     {
         // name and value don't contain html special chars
         return '<input type="hidden" name="' . $name . '" value="' . $value . '">' . PHP_EOL;
+    }
+
+    /**
+     * http://stackoverflow.com/questions/3232965/sort-multidimensional-array-by-multiple-keys/43700433#43700433
+     */
+    private static function make_cmp(array $sortValues)
+    {
+        return function ($a, $b) use (&$sortValues) {
+
+
+            foreach ($sortValues as $column => $sortDir) {
+
+                // skip "forgotten" unsearchable columns
+                if (false === array_key_exists($column, $a)) {
+                    continue;
+                }
+
+                if (is_string($a[$column])) {
+                    $diff = strcmp($a[$column], $b[$column]);
+                    if ($diff !== 0) {
+                        if ('asc' === $sortDir) {
+                            return $diff;
+                        }
+                        return $diff * -1;
+                    }
+                } else { // float, int
+                    $diff = ($a[$column] > $b[$column]);
+                    if ('asc' === $sortDir) {
+                        return $diff;
+                    } else {
+                        return !$diff;
+                    }
+                }
+            }
+            return 0;
+        };
     }
 }
