@@ -19,9 +19,20 @@ class QueryDecorator
     private $allowNipp;
 
     /**
-     * Which values the user is allowed to modify
+     * Which values the user is allowed to modify for search
      */
     private $allowedSearchFields;
+
+    /**
+     * Which values the user is allowed to modify for sort.
+     * If the key is provided (i.e non numeric), then it represents the
+     * real field, while the value represents the symbolic field.
+     *
+     * This mechanism allows the developer to hide the table fields to the user.
+     * For instance, with this mechanism you can have a "price" field in the uri, which translates
+     * to a "p._sale_price_with_tax" field in this class.
+     *
+     */
     private $allowedSortFields;
 
 
@@ -168,7 +179,12 @@ class QueryDecorator
             }
 
             foreach ($sortItems as $field => $isAsc) {
-                if (in_array($field, $this->allowedSortFields)) {
+                if (false !== ($alias = array_search($field, $this->allowedSortFields, true))) {
+
+                    if (true === is_numeric($alias)) {
+                        $alias = $field;
+                    }
+
                     if (false === $valid) {
                         $query .= " order by ";
                         $valid = true;
@@ -178,7 +194,7 @@ class QueryDecorator
                         $query .= ', ';
                     }
 
-                    $query .= "$field ";
+                    $query .= "$alias ";
                     if (true === $isAsc) {
                         $query .= 'asc';
                     } else {

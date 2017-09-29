@@ -69,7 +69,12 @@ class PaginationFrame
             };
         }
 
-        $nbPages = ceil($nbItems / $nipp);
+        $nipp = (int)$nipp;
+        if ($nipp <= 0) {
+            $nbPages = 1;
+        } else {
+            $nbPages = ceil($nbItems / $nipp);
+        }
 
         $o = new static();
         if (array_key_exists($namePage, $pool)) {
