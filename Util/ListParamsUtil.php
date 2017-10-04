@@ -211,7 +211,7 @@ class ListParamsUtil
     {
         $s = '';
         foreach ($pool as $key => $value) {
-            if (in_array($value, $except)) {
+            if (in_array($key, $except)) {
                 continue;
             }
             if (is_array($value)) {
@@ -222,7 +222,6 @@ class ListParamsUtil
                 $s .= self::getHiddenInput($key, $value);
             }
         }
-
         return $s;
     }
 
