@@ -4,8 +4,8 @@
 namespace ListParams\ListBundle;
 
 use ListParams\Controller\InfoFrame;
-use ListParams\Controller\PaginationFrame;
-use ListParams\Controller\SortFrame;
+use ListParams\Controller\PaginationFrameInterface;
+use ListParams\Controller\SortFrameInterface;
 use ListParams\ListParamsInterface;
 
 class LingListBundle extends ListBundle
@@ -15,8 +15,8 @@ class LingListBundle extends ListBundle
     public static function createByItems(
         array $items,
         ListParamsInterface $params = null,
-        PaginationFrame $pagination = null,
-        SortFrame $sort = null
+        PaginationFrameInterface $pagination = null,
+        SortFrameInterface $sort = null
     )
     {
         $list = ListBundle::create()->setItems($items);

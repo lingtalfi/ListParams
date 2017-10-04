@@ -440,6 +440,14 @@ Related
 History Log
 ------------------
     
+- 1.10.0 -- 2017-10-04
+
+    - add InfoFrameInterface 
+    - add PaginationFrameInterface 
+    - add SortFrameInterface 
+    - add PaginationFrame::createByOptions method 
+    - add SortFrame::createByOptions method 
+    
 - 1.9.0 -- 2017-10-04
 
     - add InfoFrame::createByOptions method 

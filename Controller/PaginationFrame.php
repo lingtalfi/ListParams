@@ -37,7 +37,7 @@ use ListParams\Util\ListParamsUtil;
  *
  *
  */
-class PaginationFrame
+class PaginationFrame implements PaginationFrameInterface
 {
     private $currentPage;
     private $items;
@@ -69,16 +69,60 @@ class PaginationFrame
             };
         }
 
-        $nipp = (int)$nipp;
+        return self::createByOptions([
+            'nipp' => $nipp,
+            'nbTotalItems' => $nbItems,
+            'namePage' => $namePage,
+            'pool' => $pool,
+            'linkFormatter' => $linkFormatter,
+        ]);
+
+    }
+
+
+    /**
+     * @param array $options
+     *
+     * - nipp
+     * - nbTotalItems
+     * - namePage
+     * - pool
+     * - linkFormatter
+     *
+     *
+     * @return static
+     */
+    public static function createByOptions(array $options)
+    {
+        $pool = (array_key_exists('pool', $options)) ? $options['pool'] : [];
+        $options = array_replace($options, [
+            'nipp' => 20,
+            'nbTotalItems' => 0,
+            'namePage' => 'page',
+            'pool' => [],
+        ]);
+
+        if (false === array_key_exists('linkFormatter', $options)) {
+            $uriParams = $pool;
+            $uriParams[$options['namePage']] = '%s';
+            $uri = UriTool::uri(null, $uriParams, true);
+            $linkFormatter = function ($n) use ($uri) {
+                return sprintf($uri, $n);
+            };
+            $options['linkFormatter'] = $linkFormatter;
+        }
+
+
+        $nipp = (int)$options['nipp'];
         if ($nipp <= 0) {
             $nbPages = 1;
         } else {
-            $nbPages = ceil($nbItems / $nipp);
+            $nbPages = ceil($options['nbTotalItems'] / $nipp);
         }
 
         $o = new static();
-        if (array_key_exists($namePage, $pool)) {
-            $currentPage = (int)$pool[$namePage];
+        if (array_key_exists($options['namePage'], $options['pool'])) {
+            $currentPage = (int)$options['namePage'];
             if ($currentPage < 1) {
                 $currentPage = 1;
             } elseif ($currentPage > $nbPages) {
@@ -91,7 +135,7 @@ class PaginationFrame
         for ($i = 1; $i <= $nbPages; $i++) {
             $o->items[] = [
                 'number' => $i,
-                'link' => call_user_func($linkFormatter, $i),
+                'link' => call_user_func($options['linkFormatter'], $i),
                 'selected' => ($i === $currentPage),
             ];
         }

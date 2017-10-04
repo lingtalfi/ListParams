@@ -50,7 +50,7 @@ use ListParams\Util\ListParamsUtil;
  *
  *
  */
-class SortFrame
+class SortFrame implements SortFrameInterface
 {
 
     private $formMethod;
@@ -82,11 +82,37 @@ class SortFrame
 
     public static function createByLabels(array $value2Label, ListParamsInterface $params)
     {
+        return self::createByOptions([
+            'nameSort' => $params->getNameSort(),
+            'nameSortDir' => $params->getNameSortDir(),
+            'pool' => $params->getPool(),
+            'value2Label' => $value2Label,
+            'formMethod' => $params->getPoolType(),
+            //
+            'formTrail' => ListParamsUtil::getFormTrail($params->getPool(), $params, "sort"),
+        ]);
+    }
+
+
+    public static function createByOptions(array $options)
+    {
+
+        $options = array_replace($options, [
+            'nameSort' => 'sort',
+            'nameSortDir' => 'asc',
+            'pool' => [],
+            'value2Label' => [],
+            'formMethod' => 'get',
+            //
+            'formTrail' => '',
+        ]);
+
+
         $o = new self();
 
-        $nameSort = $params->getNameSort();
-        $nameSortDir = $params->getNameSortDir();
-        $pool = $params->getPool();
+        $nameSort = $options['nameSort'];
+        $nameSortDir = $options['nameSortDir'];
+        $pool = $options['pool'];
 
 
         $o->nameSort = $nameSort;
@@ -98,7 +124,7 @@ class SortFrame
             $val = $pool[$nameSort];
         }
         $sortItems = [];
-        foreach ($value2Label as $value => $label) {
+        foreach ($options['value2Label'] as $value => $label) {
             $selected = ($value === $val);
             $sortItems[] = [
                 'value' => $value,
@@ -123,8 +149,8 @@ class SortFrame
         $o->selectedSortDirDesc = ($o->valueSortDirDesc === $val);
 
 
-        $o->formMethod = $params->getPoolType();
-        $o->formTrail = ListParamsUtil::getFormTrail($pool, $params, "sort");
+        $o->formMethod = $options['formMethod'];
+        $o->formTrail = $options['formTrail'];
 
 
         return $o;

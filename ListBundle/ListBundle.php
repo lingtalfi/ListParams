@@ -3,9 +3,9 @@
 
 namespace ListParams\ListBundle;
 
-use ListParams\Controller\InfoFrame;
-use ListParams\Controller\PaginationFrame;
-use ListParams\Controller\SortFrame;
+use ListParams\Controller\InfoFrameInterface;
+use ListParams\Controller\PaginationFrameInterface;
+use ListParams\Controller\SortFrameInterface;
 use ListParams\ListParamsInterface;
 
 class ListBundle implements ListBundleInterface
@@ -64,19 +64,19 @@ class ListBundle implements ListBundleInterface
         return $this;
     }
 
-    public function setPagination(PaginationFrame $pagination)
+    public function setPagination(PaginationFrameInterface $pagination)
     {
         $this->pagination = $pagination;
         return $this;
     }
 
-    public function setSort(SortFrame $sort)
+    public function setSort(SortFrameInterface $sort)
     {
         $this->sort = $sort;
         return $this;
     }
 
-    public function setInfo(InfoFrame $info)
+    public function setInfo(InfoFrameInterface $info)
     {
         $this->info = $info;
         return $this;

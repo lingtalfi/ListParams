@@ -5,8 +5,11 @@ namespace ListParams\ListBundle;
 
 
 use ListParams\Controller\InfoFrame;
+use ListParams\Controller\InfoFrameInterface;
 use ListParams\Controller\PaginationFrame;
+use ListParams\Controller\PaginationFrameInterface;
 use ListParams\Controller\SortFrame;
+use ListParams\Controller\SortFrameInterface;
 use ListParams\ListParamsInterface;
 
 interface ListBundleInterface
@@ -24,17 +27,17 @@ interface ListBundleInterface
     public function getListParams();
 
     /**
-     * @return PaginationFrame|null
+     * @return PaginationFrameInterface|null
      */
     public function getPaginationFrame();
 
     /**
-     * @return SortFrame|null
+     * @return SortFrameInterface|null
      */
     public function getSortFrame();
 
     /**
-     * @return InfoFrame|null
+     * @return InfoFrameInterface|null
      */
     public function getInfoFrame();
 

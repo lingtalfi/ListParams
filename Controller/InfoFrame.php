@@ -23,7 +23,7 @@ use ListParams\Util\ListParamsUtil;
  *
  *
  */
-class InfoFrame
+class InfoFrame implements InfoFrameInterface
 {
 
     private $offsetStart;
