@@ -122,7 +122,7 @@ class PaginationFrame implements PaginationFrameInterface
 
         $o = new static();
         if (array_key_exists($options['namePage'], $options['pool'])) {
-            $currentPage = (int)$options['namePage'];
+            $currentPage = (int)$options['pool'][$options['namePage']];
             if ($currentPage < 1) {
                 $currentPage = 1;
             } elseif ($currentPage > $nbPages) {

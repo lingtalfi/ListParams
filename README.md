@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.10.4 -- 2017-10-04
+
+    - fix PaginationFrame::createByOptions incorrect currentPage  
+    
 - 1.10.3 -- 2017-10-04
 
     - fix PaginationFrame::createByOptions default options overriding user options 
