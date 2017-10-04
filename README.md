@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.10.3 -- 2017-10-04
+
+    - fix PaginationFrame::createByOptions default options overriding user options 
+        
 - 1.10.2 -- 2017-10-04
 
     - fix ListParamsUtil::getFormTrailByPool using value instead of keys (dumb error) 

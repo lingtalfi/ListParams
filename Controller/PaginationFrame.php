@@ -95,12 +95,12 @@ class PaginationFrame implements PaginationFrameInterface
     public static function createByOptions(array $options)
     {
         $pool = (array_key_exists('pool', $options)) ? $options['pool'] : [];
-        $options = array_replace($options, [
+        $options = array_replace([
             'nipp' => 20,
             'nbTotalItems' => 0,
             'namePage' => 'page',
             'pool' => [],
-        ]);
+        ], $options);
 
         if (false === array_key_exists('linkFormatter', $options)) {
             $uriParams = $pool;
