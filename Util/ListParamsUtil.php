@@ -207,6 +207,26 @@ class ListParamsUtil
     }
 
 
+    public static function getFormTrailByPool(array $pool, array $except = [])
+    {
+        $s = '';
+        foreach ($pool as $key => $value) {
+            if (in_array($value, $except)) {
+                continue;
+            }
+            if (is_array($value)) {
+                foreach ($value as $val) {
+                    $s .= self::getHiddenInput($key, $val);
+                }
+            } else {
+                $s .= self::getHiddenInput($key, $value);
+            }
+        }
+
+        return $s;
+    }
+
+
 
     //--------------------------------------------
     //

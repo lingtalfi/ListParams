@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.10.1 -- 2017-10-04
+
+    - fix SortFrame::createByOptions default options overriding user options 
+    
 - 1.10.0 -- 2017-10-04
 
     - add InfoFrameInterface 

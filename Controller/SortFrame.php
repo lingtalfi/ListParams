@@ -97,7 +97,7 @@ class SortFrame implements SortFrameInterface
     public static function createByOptions(array $options)
     {
 
-        $options = array_replace($options, [
+        $options = array_replace([
             'nameSort' => 'sort',
             'nameSortDir' => 'asc',
             'pool' => [],
@@ -105,7 +105,7 @@ class SortFrame implements SortFrameInterface
             'formMethod' => 'get',
             //
             'formTrail' => '',
-        ]);
+        ], $options);
 
 
         $o = new self();
