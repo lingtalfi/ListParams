@@ -440,6 +440,10 @@ Related
 History Log
 ------------------
     
+- 1.9.0 -- 2017-10-04
+
+    - add InfoFrame::createByOptions method 
+    
 - 1.8.3 -- 2017-09-29
 
     - fix PaginationFrame.createByParams division by zero 

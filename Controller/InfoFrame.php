@@ -63,6 +63,26 @@ class InfoFrame
     }
 
 
+    public static function createByOptions(array $options)
+    {
+        $o = new self();
+        $nipp = array_key_exists('nipp', $options) ? $options['nipp'] : 20;
+        $nbTotalItems = array_key_exists('nbTotalItems', $options) ? $options['nbTotalItems'] : 0;
+        $page = array_key_exists('page', $options) ? $options['page'] : 1;
+        $offsetStart = ($page - 1) * $nipp;
+        $offsetEnd = $offsetStart + $nipp;
+        if ($offsetEnd > $nbTotalItems) {
+            $offsetEnd = $nbTotalItems;
+        }
+        $o->offsetStart = $offsetStart;
+        $o->offsetEnd = $offsetEnd;
+        $o->nbTotalItems = $nbTotalItems;
+        $o->page = $page;
+        $o->nipp = $nipp;
+        return $o;
+    }
+
+
     /**
      * @return array
      */
