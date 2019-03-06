@@ -1,12 +1,12 @@
 <?php
 
 
-namespace ListParams\ListBundle;
+namespace Ling\ListParams\ListBundle;
 
-use ListParams\Controller\InfoFrameInterface;
-use ListParams\Controller\PaginationFrameInterface;
-use ListParams\Controller\SortFrameInterface;
-use ListParams\ListParamsInterface;
+use Ling\ListParams\Controller\InfoFrameInterface;
+use Ling\ListParams\Controller\PaginationFrameInterface;
+use Ling\ListParams\Controller\SortFrameInterface;
+use Ling\ListParams\ListParamsInterface;
 
 class ListBundle implements ListBundleInterface
 {

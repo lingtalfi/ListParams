@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ListParams\Controller;
+namespace Ling\ListParams\Controller;
 
 
 interface PaginationFrameInterface

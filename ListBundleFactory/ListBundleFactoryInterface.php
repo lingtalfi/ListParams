@@ -1,11 +1,11 @@
 <?php
 
 
-namespace ListParams\ListBundleFactory;
+namespace Ling\ListParams\ListBundleFactory;
 
 
 
-use ListParams\ListBundle\ListBundleInterface;
+use Ling\ListParams\ListBundle\ListBundleInterface;
 
 interface ListBundleFactoryInterface
 {

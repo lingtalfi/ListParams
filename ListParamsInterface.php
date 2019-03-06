@@ -1,6 +1,6 @@
 <?php
 
-namespace ListParams;
+namespace Ling\ListParams;
 
 
 interface ListParamsInterface

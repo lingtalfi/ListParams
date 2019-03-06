@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ListParams\Exception;
+namespace Ling\ListParams\Exception;
 
 class ListParamsException extends \Exception
 {

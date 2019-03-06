@@ -16,7 +16,7 @@ Install
 ==========
 Using the [uni](https://github.com/lingtalfi/universe-naive-importer) command.
 ```bash
-uni import ListParams
+uni import Ling/ListParams
 ```
 
 Or just download it and place it where you want otherwise.
@@ -137,10 +137,10 @@ which is the base code for the model which returns a listBundle (we are inside a
 
 <?php 
 
-use ListParams\Controller\PaginationFrame;
-use ListParams\Controller\SortFrame;
-use ListParams\ListBundle\LingListBundle;
-use ListParams\ListParams;
+use Ling\ListParams\Controller\PaginationFrame;
+use Ling\ListParams\Controller\SortFrame;
+use Ling\ListParams\ListBundle\LingListBundle;
+use Ling\ListParams\ListParams;
 use Module\Ekom\Utils\E;
 use Module\ThisApp\Api\ThisAppApi;
 
@@ -275,7 +275,7 @@ Here is my concrete code used in the example:
 
 
 use Kamille\Utils\ThemeHelper\KamilleThemeHelper;
-use ListParams\ListBundle\ListBundleInterface;
+use Ling\ListParams\ListBundle\ListBundleInterface;
 
 use Module\ThisApp\Ekom\View\Customer\InvoiceTemplateRenderer;
 use Module\ThisApp\Ekom\View\InfoTemplateRenderer;

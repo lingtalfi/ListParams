@@ -1,10 +1,10 @@
 <?php
 
 
-namespace ListParams\Util;
+namespace Ling\ListParams\Util;
 
 
-use ListParams\ListParamsInterface;
+use Ling\ListParams\ListParamsInterface;
 
 class ListParamsUtil
 {

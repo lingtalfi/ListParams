@@ -1,12 +1,12 @@
 <?php
 
 
-namespace ListParams\Controller;
+namespace Ling\ListParams\Controller;
 
 
-use Bat\UriTool;
-use ListParams\ListParamsInterface;
-use ListParams\Util\ListParamsUtil;
+use Ling\Bat\UriTool;
+use Ling\ListParams\ListParamsInterface;
+use Ling\ListParams\Util\ListParamsUtil;
 
 
 /**

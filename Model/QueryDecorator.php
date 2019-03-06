@@ -1,11 +1,11 @@
 <?php
 
 
-namespace ListParams\Model;
+namespace Ling\ListParams\Model;
 
 
-use ListParams\Exception\ListParamsException;
-use ListParams\ListParamsInterface;
+use Ling\ListParams\Exception\ListParamsException;
+use Ling\ListParams\ListParamsInterface;
 
 class QueryDecorator
 {
